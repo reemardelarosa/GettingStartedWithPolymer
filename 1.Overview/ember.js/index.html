@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+  <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.4.4/ember-template-compiler.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.4.4/ember.debug.js"></script>
+</head>
+<body>
+  <script>
+    App = Ember.Application.create();
+
+    Ember.Component.extend({
+      classNames: ["hello-component"]
+    });
+  </script>
+  <script type="text/x-handlebars" id="components/hello-component">
+    <div>Hello there</div>
+  </script>
+
+  <script type="text/x-handlebars">
+    {{hello-component}}
+  </script>
+
+</body>
+</html>
