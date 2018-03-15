@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
     <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
-    <title>Property Key</title>
+    <title>Data Binding in Object</title>
 </head>
 <body>
     <alert-element></alert-element>
-
     <dom-module id="alert-element">
         <template>
-            <paper-input value="{{message}}"></paper-input> 
-            [[message]]
+            <paper-input value="{{message.text}}"></paper-input>
+            [[message.text]]
         </template>
     </dom-module>
-
     <script>
         HTMLImports.whenReady(() => {
             Polymer({
                 is: "alert-element",
                 properties: {
                     message: {
-                        type: String,
-                        value: "Hello World => ",
-                        notify: true, // <property-name>-changed is triggered,
-                        readOnly: true
+                        type: Object,
+                        value: () => {
+                            return {
+                                text: "Hello World",
+                                status: "success"
+                            }
+                        }
                     }
                 },
-                ready: () => {
-                    this.addEventListener("message-changed", (event) => {
-                        console.log(event);
-                    });
-                },
-                _observeMessage: (message) => {
-                    console.dir(message);
+                ready: function () {
+                    this.message.text = "Successfully Loaded"; //Step 1
+                    this.message = {text: "Successfully Loaded", status: "Success"}; // Step 2
+                    this.notifyPath("message.text", "Notifypath updated");
+                    this.set("message.text", "Successfull set!"); 
                 }
             });
         });

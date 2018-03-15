@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Array Selector</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <template is="dom-repeat" id="messageList" items="{{messages}}">
+                {{item}}
+                <button on-click="toggleSelection">Select</button> <br>
+            </template>
+
+            <array-selector id="selector" items="{{messages}}" selected="{{selected}}" multi toggle></array-selector>
+            <div>Selected Messages:</div>
+            <template is="dom-repeat" items="{{selected}}">{{item}} <br></template> 
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    messages: {
+                        type: Array,
+                        value: function() {
+                            return [
+                                "Message 1",
+                                "Message 2"
+                            ];
+                        }
+                    }
+                },
+                toggleSelection: function(e) {
+                    var item = this.$.messageList.itemForElement(e.target);
+                    this.$.selector.select(item);
+                    console.dir(this.$.selector);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

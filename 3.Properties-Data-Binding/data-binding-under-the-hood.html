@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
     <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
-    <title>Property Key</title>
-</head>
+</head> 
 <body>
-    <alert-element></alert-element>
-
-    <dom-module id="alert-element">
+    <alert-change></alert-change>
+    <dom-module id="alert-change">
+        
         <template>
-            <paper-input value="{{message}}"></paper-input> 
+            <paper-input value="{{message}}"></paper-input>
             [[message]]
-        </template>
-    </dom-module>
 
+        </template>
+        
+    </dom-module>
     <script>
         HTMLImports.whenReady(() => {
             Polymer({
-                is: "alert-element",
+                is: "alert-change",
                 properties: {
                     message: {
                         type: String,
-                        value: "Hello World => ",
-                        notify: true, // <property-name>-changed is triggered,
-                        readOnly: true
+                        value: "Data Binding"
                     }
                 },
                 ready: () => {
-                    this.addEventListener("message-changed", (event) => {
-                        console.log(event);
+                    this.addEventListener("message-changed", event => {
+                        console.dir(event);
                     });
                 },
-                _observeMessage: (message) => {
-                    console.dir(message);
-                }
+                // Message setter pseudocode created automatically in Polymer
+                // set message: (setVal) => {
+                //     let oldVal = this.__data__.message;
+                //     if(oldVal !== setVal) {
+                //         1. this.__data__.message = setVal
+                //         2. loop through property effects
+                //         3. fire message-changed event
+                //     }
+                // }
             });
         });
+
     </script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
+    <title>Native Element Binding</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <dom-module is="alert-element">
+        <template>
+            {{message}}
+            <paper-input label="enter alert message "value="{{message::value-changed}}"></paper-input>
+            <input value="{{message::input}}">
+        </template>
+    </dom-module>
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    type: String,
+                    value: "Successful alert message!",
+                    notify: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>

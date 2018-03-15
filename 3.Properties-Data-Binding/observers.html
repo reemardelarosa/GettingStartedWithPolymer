@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
+    <title>Observers</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <div hidden$="{{!loading}}">loading (<span>{{loadingPercentage}}%</span>)...</div>
+            [[message]]
+            <paper-input value="{{message}}"></paper-input>
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    loadingPercentage: {
+                        type: Number,
+                        value: 0
+                    },
+                    loading: {
+                        type: Boolean,
+                        value: false
+                    },
+                    message: {
+                        type: String,
+                        value: "hello",
+                        observer: 'messageChanged'
+                    }
+                },
+                observers: [
+                    'loadingCheck(loadingPercentage, loading)'
+                ],
+                messageChanged: (newValue, oldValue) => {
+                    console.log(oldValue+ " : "+ newValue);
+                },
+                loadingCheck: (loadingPercentage, loading) => {
+                    console.log("loadingPercentage: ", loadingPercentage, "loading: " + loading);
+                },
+                ready: function() {
+                    this.message = "not quite my tempo.";
+                    this.loading = true;
+                    this.loadingPercentage = 20;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

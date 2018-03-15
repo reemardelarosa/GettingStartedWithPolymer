@@ -4,38 +4,38 @@
     <meta charset="UTF-8">
     <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
-    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
-    <title>Property Key</title>
+    <title>Conditional Templates - dom-if</title>
 </head>
 <body>
     <alert-element></alert-element>
-
     <dom-module id="alert-element">
         <template>
-            <paper-input value="{{message}}"></paper-input> 
-            [[message]]
+            Secured messages:
+            <template is="dom-if" if="{{isSecureMessage}}">
+                Super secure! <span>{{message}}</span>
+            </template>
         </template>
     </dom-module>
-
     <script>
-        HTMLImports.whenReady(() => {
+        HTMLImports.whenReady(function() {
             Polymer({
                 is: "alert-element",
                 properties: {
                     message: {
                         type: String,
-                        value: "Hello World => ",
-                        notify: true, // <property-name>-changed is triggered,
-                        readOnly: true
+                        value: "This message is super secure. it will self-destruct."
+                    },
+                    isSecureMessage: {
+                        type: Boolean,
+                        value: false
                     }
                 },
-                ready: () => {
-                    this.addEventListener("message-changed", (event) => {
-                        console.log(event);
-                    });
-                },
-                _observeMessage: (message) => {
-                    console.dir(message);
+                ready: function() {
+                    var self = this;
+                    self.isSecureMessage = true;
+                    setTimeout(function() {
+                        self.isSecureMessage = false;
+                    }, 3000);
                 }
             });
         });

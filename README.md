@@ -273,6 +273,65 @@ Polymer with paper-input element
 > `[]` - One-way binding
 
 > `{}` - Two-way binding
+
+> Select the element and type `$0` in the console to access the component.
+
+> `$0._propertyEffects` to access arrays of properties.
+
+```
+// Message setter pseudocode created automatically in Polymer
+set message: (setVal) => {
+let oldVal = this.__data__.message;
+if(oldVal !== setVal) {
+    1. this.__data__.message = setVal
+    2. loop through property effects
+    3. fire message-changed event
+}
+}
+```
+
+#### Data Binding in Object
+```
+Polymer({
+    is: "alert-element",
+    properties: {
+        message: {
+            type: Object,
+            value: () => {
+                return {
+                    text: "Hello World",
+                    status: "success"
+                }
+            }
+        }
+    }
+});
+
+...
+this.message.text = "Successfully Loaded"; // Can't update the `message.text`
+this.message = {text: "Successfully Loaded", status: "Success"}; // Can update
+this.notifyPath("message.text", "Notifypath updated"); // Can update
+this.set("message.text", "Successfull set!"); // Can update
+```
+
+#### Native Element Binding
+> after property, use `::` then correct event to bind the native element, e.g. property message::input
+```
+
+{{message}}
+<paper-input label="enter alert message "value="{{message::value-changed}}"></paper-input>
+<input value="{{message::input}}">
+
+properties: {
+    type: String,
+    value: "Successful alert message!",
+    notify: true
+}
+
+```
+#### Computed Properties
+> It is just another method that is being called everytime the parameter/property is updated.
+                
 ### Observers
 ### Special Templates
 

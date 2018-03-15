@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Sorting and Filtering</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>
+            <input value="{{filterString::input}}"> <br>
+            <template is="dom-repeat" items="{{messages}}" as="message" filter="{{computeFilter(filterString)}}" sort="sortPriority">
+                {{message.text}}: {{message.priority}}
+                <br>
+            </template>
+        </template>
+        
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    messages: {
+                        type: Array,
+                        value: function() {
+                            return [
+                                {
+                                    text: 'one message',
+                                    priority: 2
+                                },
+                                {
+                                    text: 'another message',
+                                    priority: 5
+                                },
+                                {
+                                    text: 'message',
+                                    priority: 2
+                                },
+                                {
+                                    text: 'two message',
+                                    priority: 3
+                                },
+                                {
+                                    text: 'message 1',
+                                    priority: 1
+                                },
+                                {
+                                    text: 'four message',
+                                    priority: 4
+                                }
+                            ];
+                        }
+                    },
+                    filterString: {
+                        type: String
+                    }
+                },
+                sortPriority: function(a, b) {
+                    // return a.priority - b.priority; // ascending
+                    return b.priority - a.priority; // descending
+                },
+                computeFilter: function(text) {
+                    return function(message) {
+                        return message.text.indexOf(text) > -1;
+                    }
+                },
+                ready: function() {
+                    // this.set('messages.2.priority', 'Major')
+                }
+            });
+        });
+    </script>
+</body>
+</html>

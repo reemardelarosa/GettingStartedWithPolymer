@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Observer Sub Properties</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <div hidden$="{{loadStatus.loading}}">loading (<span>{{loadStatus.percent}}%</span>)</div>
+            [[message]]
+            <paper-input value="{{message}}"></paper-input>
+        </template>
+
+        <script>
+            HTMLImports.whenReady(() => {
+                Polymer({
+                    is: "alert-element",
+                    properties: {
+                        message: {
+                            type: String,
+                            value: "Hello"
+                        },
+                        loadStatus: {
+                            type: Object,
+                            value: function() {
+                                return {percent: 0, loading: true};
+                            }
+                        }
+                    },
+                    observers: [
+                        'loadingCheck(loadStatus.percent)',
+                        'loadingCheckAll(loadStatus.*)'
+                    ],
+                    loadingCheckAll: function(changeRecord) {
+                        console.log(changeRecord);
+                    },
+                    loadingCheck: function(loadingPercentage) {
+                        console.log(loadingPercentage + '%');
+                    },
+                    ready: function() {
+                        this.message = "Not quite my tempo";
+                        this.loadStatus.percent = 10; // Can't update loadStatus object
+                        this.set("loadStatus.percent", 20);
+                    }
+                });
+            });
+        </script>
+    </dom-module>
+</body>
+</html>

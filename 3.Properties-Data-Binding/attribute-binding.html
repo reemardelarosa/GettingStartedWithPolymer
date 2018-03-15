@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/paper-input/paper-input.html" />
+    <title>Attribute Binding</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <input type="checkbox" checked$="{{messageChecked}}">
+            <div style$="{{messageStyle}}">
+                <div class$="{{messageClass}}">
+                    <a href$="{{messageUrl}}">
+                        <label for$="{{messageLabel}}">Label</label>
+                        <div data-bar$="{{messagelabel}}">Dat-Bar</div>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </dom-module>
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    messageClass: {
+                        type: String,
+                        value: "m-class"
+                    },
+                    messageChecked: {
+                        type: Boolean,
+                        value: true
+                    },
+                    messageUrl: {
+                        type: String,
+                        vlaue: "http://pluralsight.com"
+                    },
+                    messageStyle: {
+                        type: String,
+                        value: 'background-color: #efefef'
+                    },
+                    messageLabel: {
+                        type: String,
+                        value: "message-label"
+                    }
+                },
+                ready: function() {
+
+                }
+            });
+        });
+    </script>
+</body>
+</html>

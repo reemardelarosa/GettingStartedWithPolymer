@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Observer Array Mutation</title>
+</head>
+<body>
+    <alert-element></alert-element>
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    messages: {
+                        type: Array,
+                        value: function() {
+                            return [
+                                {
+                                    text: "loading messages"
+                                },
+                                {
+                                    text: "messages loaded"
+                                }
+                            ];
+                        }
+                    }
+                },
+                observers: [
+                    'messagesAddedOrRemoved(messages.splices)'
+                ],
+                messagesAddedOrRemoved: function(changedRecord) {
+                    if (!changedRecord) return;
+                    changedRecord.indexSplices.forEach(function(s) {
+                        console.log(s.index + ' position where the splice started');
+                        s.removed.forEach(function(item) {
+                            console.log(item.text + ' was removed');
+                        });
+                        console.log(s.addedCount + ' items were added');
+                    });
+                    console.log('--------------');
+                },
+                ready: function() {
+                    console.dir(this.messages);
+                    this.splice('messages', 0, 1); // Array Mutation Step 1
+                    this.push('messages', {text: "message added"}, {text: "message added1"});
+                }
+            });
+        });
+    </script>
+</body>
+</html>
