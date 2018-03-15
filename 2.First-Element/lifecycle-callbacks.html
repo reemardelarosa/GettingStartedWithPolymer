@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://polygit.org/components/polymer/polymer.html"> -->
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Class Style Constructor</title>
+</head>
+<body>
+        
+    <button onclick="document.querySelector('hello-element').remove()">Remove Hello Element</button>
+        
+    <script>
+        HTMLImports.whenReady(() => {
+            HelloElement = Polymer({
+                is: "hello-element",
+                created: () => {
+                    this.textContent = "Hello Component";
+                    console.log("Created: Hello Element has been created");
+                },
+                ready: () => {
+                    console.log("Ready: Property values set and local DOM is initialized");
+                    this.message = "hello2";
+                },
+                attached: () => {
+                    console.log("Attached: The element is attached to the document. Can be called multiple times");;
+                },
+                detached: () => {
+                    console.log("Detached: The element has been detached.");;
+                },
+                factoryImpl: () => {
+                    console.log("Factory Impl: Only invoked when creating an event usigng the constructor");
+                },
+                attributeChanged: (attrName, oldValue, newValue) => {
+                    console.log("AttributeChanged: Attribute " + attrName + " oldValue: " + oldValue + " newValue: " + newValue);
+                }
+            });
+
+            var el = new HelloElement();
+            document.body.appendChild(el);
+            var el2 = document.createElement("hello-element");
+            document.body.appendChild(el2);
+        })
+    </script>
+</body>
+</html>

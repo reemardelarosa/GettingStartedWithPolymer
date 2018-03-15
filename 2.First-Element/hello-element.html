@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://polygit.org/components/polymer/polymer.html">
+    <title>Hello Element</title>
+</head>
+<body>
+
+    <hello-element></hello-element>
+
+    <dom-module id="hello-element">
+        <template> Hello Component</template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: 'hello-element'
+            });
+        });   
+    </script>
+</body>
+</html>

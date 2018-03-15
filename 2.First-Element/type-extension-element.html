@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />   <title>Class Style Constructor</title>
+</head>
+<body>
+        
+    <input type="text" is="hello-element" />
+    <script>
+        HTMLImports.whenReady(function() {
+            HelloInput = Polymer({
+                is: "hello-element",
+                extends: 'input',
+                created: function () {
+                    this.value = "hello there";
+                }
+            });
+
+            var inputElement = new HelloInput();
+            console.log(inputElement instanceof HTMLInputElement);
+            document.body.appendChild(inputElement);
+            var inputElement2 = document.createElement('input', 'hello-element');
+            console.log(inputElement2 instanceof HTMLInputElement);
+            document.body.appendChild(inputElement2);
+        });
+    </script>
+</body>
+</html>
