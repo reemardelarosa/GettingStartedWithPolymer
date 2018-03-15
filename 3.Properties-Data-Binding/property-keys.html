@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />   <title>Class Style Constructor</title>
+    <title>Property Key</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>[[message]] [[alertUpdateTime]]</template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: "alert-element",
+                properties: {
+                    message: {
+                        type: String,
+                        value: "Hello World => "
+                    },
+                    alertUpdateTime: {
+                        type: Date,
+                        value: () => {
+                            return new Date();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

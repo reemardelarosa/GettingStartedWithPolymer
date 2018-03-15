@@ -122,6 +122,159 @@ Polymer with paper-input element
 </html>
 ```
 
+### Hello Element
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://polygit.org/components/polymer/polymer.html">
+    <title>Hello Element</title>
+</head>
+<body>
+
+    <hello-element></hello-element>
+
+    <dom-module id="hello-element">
+        <template> Hello Component</template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(() => {
+            Polymer({
+                is: 'hello-element'
+            });
+        });   
+    </script>
+</body>
+</html>
+```
+
+### Lifecycle Callbacks
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <script src="https://polygit.org/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://polygit.org/components/polymer/polymer.html"> -->
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Class Style Constructor</title>
+</head>
+<body>
+        
+    <button onclick="document.querySelector('hello-element').remove()">Remove Hello Element</button>
+        
+    <script>
+        HTMLImports.whenReady(() => {
+            HelloElement = Polymer({
+                is: "hello-element",
+                created: () => {
+                    this.textContent = "Hello Component";
+                    console.log("Created: Hello Element has been created");
+                },
+                ready: () => {
+                    console.log("Ready: Property values set and local DOM is initialized");
+                    this.message = "hello2";
+                },
+                attached: () => {
+                    console.log("Attached: The element is attached to the document. Can be called multiple times");;
+                },
+                detached: () => {
+                    console.log("Detached: The element has been detached.");;
+                },
+                factoryImpl: () => {
+                    console.log("Factory Impl: Only invoked when creating an event usigng the constructor");
+                },
+                attributeChanged: (attrName, oldValue, newValue) => {
+                    console.log("AttributeChanged: Attribute " + attrName + " oldValue: " + oldValue + " newValue: " + newValue);
+                }
+            });
+
+            var el = new HelloElement();
+            document.body.appendChild(el);
+            var el2 = document.createElement("hello-element");
+            document.body.appendChild(el2);
+        })
+    </script>
+</body>
+</html>
+```
+
+### Type Extension
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />   <title>Class Style Constructor</title>
+</head>
+<body>
+        
+    <input type="text" is="hello-element" />
+    <script>
+        HTMLImports.whenReady(function() {
+            HelloInput = Polymer({
+                is: "hello-element",
+                extends: 'input',
+                created: function () {
+                    this.value = "hello there";
+                }
+            });
+
+            var inputElement = new HelloInput();
+            console.log(inputElement instanceof HTMLInputElement);
+            document.body.appendChild(inputElement);
+            var inputElement2 = document.createElement('input', 'hello-element');
+            console.log(inputElement2 instanceof HTMLInputElement);
+            document.body.appendChild(inputElement2);
+        });
+    </script>
+</body>
+</html>
+```
+
 ## Properties and Data Binding
+### Properties
+1. Type
+- String
+- Number
+- Boolean
+- Object
+- Array
+- Date
+2. Value
+- The text content for String, object for...
+3. ReflectToAttribute
+```
+<!-- alert-element.html -->
+    Polymer({
+        is: "alert-element",
+        properties: {
+            message: {
+                type: String,
+                value: "Hello World => ",
+                reflectToAttribute: true
+            }
+        }
+    });
+
+<!-- Browser -->
+ <alert-element message="Hello World => ">Hello World =>  </alert-element>
+```
+- message attribute is reflected to the alert-message in the DOM.
+4. ReadOnly
+5. Notify
+6. Computed
+7. Observer
+### Data Binding
+> `[]` - One-way binding
+
+> `{}` - Two-way binding
+### Observers
+### Special Templates
+
 ## Reuse and Styling
 ## Events and Behaviors
