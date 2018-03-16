@@ -26,11 +26,11 @@
                         type: String,
                         value: "Hello World => ",
                         notify: true, // <property-name>-changed is triggered,
-                        readOnly: true
+                        // readOnly: true
                     }
                 },
-                ready: () => {
-                    this.addEventListener("message-changed", (event) => {
+                ready: function() {
+                    this.addEventListener("message-changed", function(event) {
                         console.log(event);
                     });
                 },

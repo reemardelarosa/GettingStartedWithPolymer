@@ -21,9 +21,16 @@
             Polymer({
                 is: "alert-element",
                 properties: {
-                    type: String,
-                    value: "Successful alert message!",
-                    notify: true
+                    message: {
+                        type: String,
+                        value: "Successful alert message!",
+                        notify: true
+                    }
+                },
+                ready: function() {
+                    this.addEventListener("message-changed", function(event) {
+                        console.log("value: ", event);
+                    });
                 }
             });
         });
