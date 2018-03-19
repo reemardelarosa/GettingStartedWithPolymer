@@ -1,0 +1,33 @@
+<link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html">
+
+<dom-module id="alert-element">
+    <template>
+        <style>
+            :host {
+                background-color: var(--primary-color);
+                display: block;
+            }
+            .alert-list-inner {
+                color: var(--secondary-color);
+                @apply --primary-block;
+            }
+        </style>
+        <h2 id="alertHead"></h2>
+        <ul class="alert-list-inner">
+            <li>Alert 1</li>
+            <li>Alert 2</li>
+            <li>Alert 3</li>
+        </ul>
+        <content></content>
+        <footer id="footer">Created by: <div id="creator"></div></footer>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: "alert-element",
+        ready: function() {
+            var self = this;
+        }
+    });
+</script>

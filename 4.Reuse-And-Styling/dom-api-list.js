@@ -31,3 +31,7 @@ Polymer.dom(node).getDestinationInsertionPoints()
 Polymer.dom(node).setAttribute(attribute, value)
 Polymer.dom(node).removeAttribute(attribute)
 Polymer.dom(node).classList
+
+// Observer
+var observer = Polymer.dom(node).observeNodes(anonymousFunction)
+Polymer.dom(node).unobservedNodes(observer)

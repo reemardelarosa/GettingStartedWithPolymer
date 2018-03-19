@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Observe Node Changes</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>
+            <div id="alertList">
+                <span>Alert 1</span>
+                <span>Alert 2</span>
+                <span>Alert 3</span>
+            </div>
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                ready: function() {
+                    var self = this;
+                    self.localObserver = Polymer.dom(self.$.allertList).observeNodes(function(info) {
+                        console.log("added", info.addedNodes);
+                        console.log("removed", info.removedNodes);
+                    });
+
+                    var spanElement = document.createElement('span');
+                    spanElement.innerHTML = 'Alert 4';
+
+                    Polymer.dom(self.$.alertList).appendChild(spanElement);
+                    Polymer.dom.flush();
+                    Polymer.dom(self.$.allertList).removeChild(spanElement);
+                    Polymer.dom.flush();
+                    Polymer.dom(self.$.alertList).unobservedNodes(self.localObserver);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<link rel="import" href="alert-element.html">
+
+<dom-module id="alert-element-wrapper">
+    <template>
+        <style>
+            alert-element {
+                --primary-color: #454545;
+                --secondary-color: blue;
+                --primary-block: {
+                    border: 1px solid #898989;
+                    display: block;
+                    border-radius: 4px;
+                    padding: 20px;
+                    margin: 20px;
+                }
+                alert-element.highlight {
+                    --primary-color: yellow;
+                }
+                :host {
+                    --custom-color: red;
+                }
+                .container {
+                    --custom-color: yellow;
+                }
+                .child {
+                    color: var(--custom-color);
+                }
+            }
+        </style>
+        <div class="container">
+            <div class="child underline">I will be red</div>
+        </div>
+        <alert-element class="highlight">
+            <ul class="alert-list">
+                <li>Alert List 4</li>
+            </ul>
+        </alert-element>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: "alert-element-wrapper",
+        ready: function() {
+            console.log(this.querySelector("alert-element").className);
+            // this.querySelector("alert-element").className += ' hightlight';
+        }
+    });
+</script>
