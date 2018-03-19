@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>DOM API</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>
+            <h2 id="alertHead"></h2>
+            <ul class="alert-list">
+                <li>Alert 1</li>
+                <li>Alert 2</li>
+                <li>Alert 3</li>
+            </ul>
+            <footer id="footer">
+                Created by: 
+                <div id="creator"></div>
+            </footer>
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                ready: function() {
+                    var spanElement = document.createElement("span");
+                    spanElement.innerHTML = "Joy";
+                    Polymer.dom(this.$.creator).appendChild(spanElement);
+                    Polymer.dom(this.$.creator).removeChild(spanElement);
+                    Polymer.dom(this.$.footer).insertBefore(spanElement, this.$.creator);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
