@@ -39,7 +39,7 @@
 
 #### Angular.js
 
-```
+```js
 import ... // Import necessary Angular Modules
 
 @Component({ // Angular component template declaration
@@ -58,7 +58,7 @@ bootstrap(HelloComponent); // Entry point for our app
 ```
 
 #### React.js
-```
+```js
 var HelloComponent = // React component template declaration
 React.createClass({
     render: function() {
@@ -78,7 +78,7 @@ ReactDOM.render( // React component declaration
 </body>
 ```
 #### Ember.js
-```
+```js
 <script type="text/x-handlebars" id="components/hello-component">
     <div>Hello There</div>  // Ember component template declaration
 </script>
@@ -97,7 +97,7 @@ Ember.Component.extend({
 ## First Element
 > [Polymer CDN](http://polygit.org/)
 
-```
+```html
 Polymer with paper-input element
 <base href="http://polygit.org/polymer+:master/components/">
 <link href="polymer/polymer.html" rel="import">
@@ -110,7 +110,7 @@ Polymer with paper-input element
 
 [w3schools HTML Tags](https://www.w3schools.com/tags/)
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +123,7 @@ Polymer with paper-input element
 ```
 
 ### Hello Element
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,7 +152,7 @@ Polymer with paper-input element
 ```
 
 ### Lifecycle Callbacks
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -204,7 +204,7 @@ Polymer with paper-input element
 ```
 
 ### Type Extension
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,7 +248,7 @@ Polymer with paper-input element
 2. Value
 - The text content for String, object for...
 3. ReflectToAttribute
-```
+```js
 <!-- alert-element.html -->
     Polymer({
         is: "alert-element",
@@ -278,7 +278,7 @@ Polymer with paper-input element
 
 > `$0._propertyEffects` to access arrays of properties.
 
-```
+```js
 // Message setter pseudocode created automatically in Polymer
 set message: (setVal) => {
 let oldVal = this.__data__.message;
@@ -291,7 +291,7 @@ if(oldVal !== setVal) {
 ```
 
 #### Data Binding in Object
-```
+```js
 Polymer({
     is: "alert-element",
     properties: {
@@ -316,12 +316,13 @@ this.set("message.text", "Successfull set!"); // Can update
 
 #### Native Element Binding
 > after property, use `::` then correct event to bind the native element, e.g. property message::input
-```
+```html
 
 {{message}}
 <paper-input label="enter alert message "value="{{message::value-changed}}"></paper-input>
 <input value="{{message::input}}">
-
+```
+```js
 properties: {
     type: String,
     value: "Successful alert message!",
@@ -331,10 +332,10 @@ properties: {
 ```
 #### Computed Properties
 > It is just another method that is being called everytime the parameter/property is updated.
-                
-### Observers
-### Special Templates
+
 
 ## Reuse and Styling
-> Style more
+### DOM Structure
+### Reusable Elements
+### Styling
 ## Events and Behaviors

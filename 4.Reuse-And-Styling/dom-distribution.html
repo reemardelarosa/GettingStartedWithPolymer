@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Dom Distribution</title>
+</head>
+<body>
+    <alert-element>
+        <span class="alert-head-content">Head 1</span>
+        <ul class="alert-data">
+            <li class="alert-message">Alert 1</li>
+            <li class="alert-message">Alert 2</li>
+            <li class="alert-message">Alert 3</li>
+        </ul>
+    </alert-element>
+    <alert-element>
+        <span class="alert-head-content">Head 2</span>
+        <div class="alert-data">Alert message!</div>
+    </alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <h2 id="alertHead">
+                <content select=".alert-head-content"></content>
+            </h2>
+            <content selected=".alert-data"></content>
+        </template>
+    </dom-module>
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element"
+            });
+        });
+    </script>
+</body>
+</html>

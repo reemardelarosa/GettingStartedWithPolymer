@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Light DOM Children</title>
+</head>
+<body>
+    <alert-element>
+        <!-- Light DOM -->
+        <ul class="alert-list">
+            <li>Alert List 4</li>
+        </ul>
+    </alert-element>
+    <dom-module id="alert-element">
+        <template>
+            <!-- Local DOM -->
+            <h2 id="alertHead"></h2>
+            <ul class="alert-list-inner">
+                <li>Alert 1</li>
+                <li>Alert 2</li>
+                <li>Alert 3</li>
+            </ul>
+            <content></content>
+        </template>
+    </dom-module>
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                ready: function() {
+                    console.log("this", this);
+                    console.log("this.root", this.root);
+                    console.log("this.$", this.$);
+                    console.log(Polymer.dom(this).children);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
