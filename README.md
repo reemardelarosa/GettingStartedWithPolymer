@@ -375,6 +375,9 @@ Polymer.dom(node).classList
 
 ```
 ### Reusable Elements
+
 ### Styling
-### [W3C CSS VAriables Standards](https://www.w3.org/TR/css-variables-1/)
+### [W3C CSS Variables Standards](https://www.w3.org/TR/css-variables-1/)
+### [Material Design Lite by Google](https://github.com/reemardelarosa/material-design-lite)
+### [Material Design ICONS by Google](https://github.com/reemardelarosa/material-design-icons)
 ## Events and Behaviors

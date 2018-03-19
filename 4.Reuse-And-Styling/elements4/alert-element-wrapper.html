@@ -1,4 +1,5 @@
 <link rel="import" href="alert-element.html">
+<link rel="import" href="external-shared-stuff.html">
 
 <dom-module id="alert-element-wrapper">
     <template>
@@ -13,10 +14,12 @@
                     margin: 20px;
                 }
                 alert-element.highlight {
-                    /* --primary-color: yellow; */
+                    --primary-color: lightgray;
                 }
             }
         </style>
+        <style include="external-shared-stuff"></style>
+        <div class="underline">This is super important and underlined</div>
         <alert-element>
             <ul class="alert-list">
                 <li>Alert List 4</li>
