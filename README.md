@@ -1,4 +1,5 @@
 # GettingStartedWithPolymer
+PolymerJS for Beginners
 
 - [Overview](#overview)
 - [First Element](#first-element)
@@ -382,7 +383,7 @@ Polymer.dom(node).classList
 ### [Material Design ICONS by Google](https://github.com/reemardelarosa/material-design-icons)
 
 ## Events and Behaviors
-### Polymer Custom Events
+### Custom Events
 ```js
 
 this.fire("custom-event", e.model.item);
@@ -390,4 +391,42 @@ this.fire("custom-event", e.model.item);
 document.querySelector('alert-element').addEventListener('custom-event', function(e) {
     console.log(e, e.detail);
 });
+```
+
+### Behaviors
+
+```js
+Polymer({
+    is: "alert-element",
+    behaviors: [ToggleBehavior]
+})
+
+ToggleBehavior = {
+    properties: {
+        isToggled: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            observer: '_toggledChanged'
+        }
+
+    },
+
+    listeners: {
+        click: '_toggle'
+    },
+
+    created: function() {
+        console.log('Toggled for ', this, 'enabled!');
+    },
+
+    _toggle: function() {
+        this.isToggled = !this.isToggled;
+    },
+
+    _toggledChanged: function(value) {
+        this.toggleClass('toggled', value);
+    }
+};  
+
 ```
