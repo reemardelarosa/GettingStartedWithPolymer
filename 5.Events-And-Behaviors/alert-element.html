@@ -1,0 +1,26 @@
+<dom-module id="alert-element">
+    <template>
+        <h2 id="alertHead"></h2>
+        <ul class="alert-list-inner">
+            <template is="dom-repeat" items="{{alerts}}" index-as="index">
+                <li>{{item}} <button on-click="removeItem">Remove</button></li>
+            </template>
+        </ul>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: "alert-element",
+        properties: {
+            alerts: {
+                type: Array,
+                value: ['alert1','alert2']
+            }
+        },
+        removeItem: function(e) {
+            this.splice('alerts', e.model.index, 1);
+            this.fire("alert-item-removed", e.model.item);
+        }
+    })
+</script>

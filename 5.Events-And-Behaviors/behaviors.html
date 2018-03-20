@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <link rel="import" href="toggle-behavior.html">
+    <title>Behaviors</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>
+            <style>
+                :host.toggled .alert-list-inner {
+                    display: none;
+                }
+            </style>
+            <h2 id="alertHead">My alert messages</h2>
+            <ul class="alert-list-inner">
+                <li>Alert 1</li>
+                <li>Alert 2</li>
+            </ul>
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                behaviors: [ToggleBehavior],
+                ready: function() {
+                    // console.log(ToggleBehavior);
+                }
+            })
+        });
+    </script>
+</body>
+</html>

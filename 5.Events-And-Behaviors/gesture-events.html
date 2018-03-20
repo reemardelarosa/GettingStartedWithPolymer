@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://bstavroulakis.com/pluralsight/polymer/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://bstavroulakis.com/pluralsight/polymer/bower_components/polymer/polymer.html" />
+    <title>Gesture Events</title>
+</head>
+<body>
+    <alert-element></alert-element>
+
+    <dom-module id="alert-element">
+        <template>
+            <h2 on-tap="headerTapped">Alert List</h2>
+            <ul id="alertList" class="alert-list-inner" on-track="handleTrack">
+                <li>Alert 1</li>
+                <li>Alert 2</li>
+                <li>Alert 3</li>
+            </ul>
+        </template>
+    </dom-module>
+
+    <script>
+        HTMLImports.whenReady(function() {
+            Polymer({
+                is: "alert-element",
+                handleTrack: function(e) {
+                    switch(e.detail.state) {
+                        case 'start':
+                            console.log('Tracking Started');
+                            break;
+                        case 'track':
+                            console.log('Tracking in progress...' + e.detail.x + ', ' + e.detail.y);
+                            break;
+                        case 'end':
+                            console.log('Tracking Ended');
+                            break;
+                    }
+                }
+            })
+        })
+    </script>
+</body>
+</html>

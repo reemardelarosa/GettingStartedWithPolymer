@@ -380,4 +380,14 @@ Polymer.dom(node).classList
 ### [W3C CSS Variables Standards](https://www.w3.org/TR/css-variables-1/)
 ### [Material Design Lite by Google](https://github.com/reemardelarosa/material-design-lite)
 ### [Material Design ICONS by Google](https://github.com/reemardelarosa/material-design-icons)
+
 ## Events and Behaviors
+### Polymer Custom Events
+```js
+
+this.fire("custom-event", e.model.item);
+
+document.querySelector('alert-element').addEventListener('custom-event', function(e) {
+    console.log(e, e.detail);
+});
+```
